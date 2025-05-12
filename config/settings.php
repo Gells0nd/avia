@@ -1,0 +1,5 @@
+<?php
+
+$settings = [
+    "companyName" => "KirillAviaLet",
+];

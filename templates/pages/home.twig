@@ -1,0 +1,106 @@
+{% extends "base.twig" %}
+
+{% block title %}Avia | Главная{% endblock %}
+
+{% block content %}
+
+    <!-- Hero Section -->
+    <div class="container mt-5">
+        <div class="p-5 mb-4 bg-light rounded-3 text-center">
+            <h1 class="display-4">Летай выгодно с Avia!</h1>
+            <p class="lead">Поиск дешёвых авиабилетов, специальные предложения, бонусы — всё в одном месте.</p>
+            <a href="/shop" class="btn btn-primary btn-lg">Найти билеты</a>
+        </div>
+    </div>
+
+    <!-- Поисковая форма -->
+    <div class="container mb-5">
+        <form class="row g-3">
+            <div class="col-md-3">
+                <label for="from" class="form-label">Откуда</label>
+                <input type="text" class="form-control" id="from" placeholder="Москва">
+            </div>
+            <div class="col-md-3">
+                <label for="to" class="form-label">Куда</label>
+                <input type="text" class="form-control" id="to" placeholder="Санкт-Петербург">
+            </div>
+            <div class="col-md-2">
+                <label for="depart" class="form-label">Туда</label>
+                <input type="date" class="form-control" id="depart">
+            </div>
+            <div class="col-md-2">
+                <label for="return" class="form-label">Обратно</label>
+                <input type="date" class="form-control" id="return">
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <button type="submit" class="btn btn-success w-100">Найти</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Популярные направления -->
+    <div class="container mb-5">
+        <h2 class="mb-4">Популярные направления</h2>
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            {% for city in cities %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <img src="{{ city["img"] }}" class="card-img-top" alt="city-photo">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ city["name"] }}</h5>
+                            <p class="card-text">Авиабилеты от 2 990 ₽ туда-обратно</p>
+                            <a href="/search?to={{ city["url"] }}" class="btn btn-outline-primary">Найти билеты</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- О компании -->
+    <div class="container mb-5">
+        <h2>Почему выбирают Avia?</h2>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <h5>✈️ Более 500 направлений</h5>
+                <p>Широкая сеть маршрутов по России, СНГ и Европе. Быстрый поиск без переплат.</p>
+            </div>
+            <div class="col-md-4">
+                <h5>💰 Лучшие цены</h5>
+                <p>Сравниваем сотни предложений, показываем самые выгодные и прозрачные цены.</p>
+            </div>
+            <div class="col-md-4">
+                <h5>🎁 Бонусная программа</h5>
+                <p>Получай мили и используй их для оплаты будущих перелётов или дополнительных услуг.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подписка -->
+    <div class="container mb-5">
+        <div class="p-4 bg-primary text-white rounded text-center">
+            <h4>Подпишитесь на лучшие предложения</h4>
+            <form class="d-flex justify-content-center mt-3" action="/subscribe" method="post">
+                <input type="email" name="email" class="form-control w-25 me-2" placeholder="Ваш email" required>
+                <button type="submit" class="btn btn-light">Подписаться</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Новости и акции -->
+    <div class="container mb-5">
+        <h2>Новости и акции</h2>
+        <div class="list-group mt-3">
+            <a href="/news/1" class="list-group-item list-group-item-action">
+                🌟 Весенняя распродажа: билеты со скидкой до 50%!
+            </a>
+            <a href="/news/2" class="list-group-item list-group-item-action">
+                🛫 Новый рейс: Казань – Тбилиси уже с июня!
+            </a>
+            <a href="/news/3" class="list-group-item list-group-item-action">
+                🎒 Бесплатный багаж в июле на всех рейсах внутри РФ
+            </a>
+        </div>
+    </div>
+
+{% endblock %}

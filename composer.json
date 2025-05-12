@@ -1,0 +1,17 @@
+{
+    "name": "dkfire/avia",
+    "autoload": {
+        "psr-4": {
+            "Dkfire\\Avia\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "DKFIRE",
+            "email": "nick71517@gmail.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "^3.0"
+    }
+}
