@@ -1,7 +1,225 @@
 {% extends "base.twig" %}
 
-{% block title %}Avia | О Нас{% endblock %}
+{% block title %}Avia | О компании{% endblock %}
 
 {% block content %}
-    <h1 class="page-title">Страница о нас</h1>
+    <div class="container mt-5">
+        <!-- Hero Section -->
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">О компании Avia</h1>
+                <p class="col-md-8 fs-4">Крупнейшая российская авиакомпания, работающая на более чем 500 направлениях по России, СНГ и Европе.</p>
+            </div>
+        </div>
+
+        <!-- История компании -->
+        <div class="row mb-5">
+            <div class="col-md-6">
+                <h2 class="mb-4">Наша история</h2>
+                <p class="lead">Avia была основана в 1992 году и с тех пор является лидером российского авиарынка.</p>
+                <p>За годы работы мы перевезли более 100 миллионов пассажиров и стали надежным партнером для миллионов людей по всему миру.</p>
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <h3 class="display-4">30+</h3>
+                                <p class="text-muted">Лет на рынке</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <h3 class="display-4">500+</h3>
+                                <p class="text-muted">Направлений</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img src="/static/img/about/banner.webp" alt="История компании" class="img-fluid rounded shadow">
+            </div>
+        </div>
+
+        <!-- Наш флот -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="mb-4">Наш флот</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="/static/img/about/a320.jpeg" class="card-img-top" alt="Airbus A320">
+                            <div class="card-body">
+                                <h5 class="card-title">Airbus A320</h5>
+                                <p class="card-text">Современный узкофюзеляжный самолет для среднемагистральных перелетов.</p>
+                                <ul class="list-unstyled">
+                                    <li>✈️ Дальность: 6,100 км</li>
+                                    <li>👥 Вместимость: 180 пассажиров</li>
+                                    <li>🛫 Количество: 25 самолетов</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="/static/img/about/737.jpg" class="card-img-top" alt="Boeing 737">
+                            <div class="card-body">
+                                <h5 class="card-title">Boeing 737</h5>
+                                <p class="card-text">Надежный узкофюзеляжный самолет для среднемагистральных перелетов.</p>
+                                <ul class="list-unstyled">
+                                    <li>✈️ Дальность: 5,600 км</li>
+                                    <li>👥 Вместимость: 189 пассажиров</li>
+                                    <li>🛫 Количество: 20 самолетов</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="/static/img/about/a330.jpg" class="card-img-top" alt="Airbus A330">
+                            <div class="card-body">
+                                <h5 class="card-title">Airbus A330</h5>
+                                <p class="card-text">Широкофюзеляжный самолет для дальнемагистральных перелетов.</p>
+                                <ul class="list-unstyled">
+                                    <li>✈️ Дальность: 11,300 км</li>
+                                    <li>👥 Вместимость: 300 пассажиров</li>
+                                    <li>🛫 Количество: 10 самолетов</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Преимущества -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="mb-4">Почему выбирают нас</h2>
+                <div class="row g-4">
+                    <div class="col-md-3">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="bi bi-shield-check display-4 text-primary mb-3"></i>
+                                <h5 class="card-title">Безопасность</h5>
+                                <p class="card-text">Строгое соблюдение всех международных стандартов безопасности</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="bi bi-clock-history display-4 text-primary mb-3"></i>
+                                <h5 class="card-title">Пунктуальность</h5>
+                                <p class="card-text">Высокий процент своевременных вылетов и прилетов</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="bi bi-emoji-smile display-4 text-primary mb-3"></i>
+                                <h5 class="card-title">Комфорт</h5>
+                                <p class="card-text">Современный флот и высокий уровень сервиса</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="bi bi-graph-up display-4 text-primary mb-3"></i>
+                                <h5 class="card-title">Развитие</h5>
+                                <p class="card-text">Постоянное расширение сети маршрутов и обновление флота</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Команда -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="mb-4">Наша команда</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="card border-0 shadow-sm">
+                            <img src="/static/img/about/team1.webp" class="card-img-top" alt="CEO">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Александр Петров</h5>
+                                <p class="text-muted">Генеральный директор</p>
+                                <p class="card-text">Более 20 лет опыта в авиационной отрасли</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card border-0 shadow-sm">
+                            <img src="/static/img/about/team2.jpg" class="card-img-top" alt="COO">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Мария Иванова</h5>
+                                <p class="text-muted">Операционный директор</p>
+                                <p class="card-text">Эксперт в области авиационной безопасности</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card border-0 shadow-sm">
+                            <img src="/static/img/about/team3.jpg" class="card-img-top" alt="CTO">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Дмитрий Сидоров</h5>
+                                <p class="text-muted">Технический директор</p>
+                                <p class="card-text">Специалист по авиационной технике</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Сертификаты -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="mb-4">Наши сертификаты</h2>
+                <div class="row g-4">
+                    <div class="col-md-3">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <img src="/static/img/about/iso9001.png" alt="ISO 9001" class="img-fluid mb-3" style="max-height: 100px;">
+                                <h5>ISO 9001</h5>
+                                <p class="text-muted">Система менеджмента качества</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <img src="/static/img/about/iosa.jpg" alt="IOSA" class="img-fluid mb-3" style="max-height: 100px;">
+                                <h5>IOSA</h5>
+                                <p class="text-muted">Международный стандарт безопасности</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <img src="/static/img/about/iso14001.jpeg" alt="ISO 14001" class="img-fluid mb-3" style="max-height: 100px;">
+                                <h5>ISO 14001</h5>
+                                <p class="text-muted">Экологический менеджмент</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <img src="/static/img/about/iso45001.jpg " alt="ISO 45001" class="img-fluid mb-3" style="max-height: 100px;">
+                                <h5>ISO 45001</h5>
+                                <p class="text-muted">Безопасность и охрана труда</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

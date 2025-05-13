@@ -1,7 +1,223 @@
 {% extends "base.twig" %}
 
-{% block title %}Avia | Правила{% endblock %}
+{% block title %}Avia | Правила перевозок{% endblock %}
 
 {% block content %}
-    <h1 class="page-title">Правила для клиентов</h1>
+    <div class="container mt-5">
+        <!-- Hero Section -->
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">Правила перевозок</h1>
+                <p class="col-md-8 fs-4">Ознакомьтесь с правилами и условиями авиаперевозок авиакомпании Avia</p>
+            </div>
+        </div>
+
+        <!-- Навигация по разделам -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <a href="#general" class="btn btn-outline-primary">Общие правила</a>
+                    <a href="#baggage" class="btn btn-outline-primary">Багаж</a>
+                    <a href="#check-in" class="btn btn-outline-primary">Регистрация</a>
+                    <a href="#refund" class="btn btn-outline-primary">Возврат билетов</a>
+                    <a href="#special" class="btn btn-outline-primary">Особые случаи</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Содержание -->
+        <div class="row mb-5">
+            <div class="col-md-3">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Содержание</h5>
+                        <div class="list-group list-group-flush">
+                            <a href="#general" class="list-group-item list-group-item-action">Общие правила</a>
+                            <a href="#baggage" class="list-group-item list-group-item-action">Багаж</a>
+                            <a href="#check-in" class="list-group-item list-group-item-action">Регистрация</a>
+                            <a href="#refund" class="list-group-item list-group-item-action">Возврат билетов</a>
+                            <a href="#special" class="list-group-item list-group-item-action">Особые случаи</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <!-- Общие правила -->
+                <section id="general" class="mb-5">
+                    <h2 class="mb-4">Общие правила</h2>
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="h5 mb-3">1. Общие положения</h3>
+                            <p>Настоящие правила регулируют отношения между авиакомпанией Avia и пассажирами при осуществлении воздушных перевозок.</p>
+
+                            <h3 class="h5 mb-3">2. Документы для перевозки</h3>
+                            <p>Для осуществления перевозки пассажир обязан предъявить:</p>
+                            <ul>
+                                <li>Действительный проездной документ (билет)</li>
+                                <li>Документ, удостоверяющий личность</li>
+                                <li>Виза (при необходимости)</li>
+                            </ul>
+
+                            <h3 class="h5 mb-3">3. Обязанности пассажира</h3>
+                            <p>Пассажир обязан:</p>
+                            <ul>
+                                <li>Соблюдать правила безопасности</li>
+                                <li>Выполнять указания членов экипажа</li>
+                                <li>Не создавать помех другим пассажирам</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Багаж -->
+                <section id="baggage" class="mb-5">
+                    <h2 class="mb-4">Багаж</h2>
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="h5 mb-3">1. Нормы провоза багажа</h3>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Класс обслуживания</th>
+                                        <th>Количество мест</th>
+                                        <th>Вес одного места</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>Эконом</td>
+                                        <td>1</td>
+                                        <td>23 кг</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Комфорт</td>
+                                        <td>2</td>
+                                        <td>23 кг</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Бизнес</td>
+                                        <td>2</td>
+                                        <td>32 кг</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3 class="h5 mb-3">2. Ручная кладь</h3>
+                            <p>Разрешенные размеры ручной клади:</p>
+                            <ul>
+                                <li>Максимальный вес: 10 кг</li>
+                                <li>Максимальные размеры: 55x40x20 см</li>
+                            </ul>
+
+                            <h3 class="h5 mb-3">3. Запрещенные предметы</h3>
+                            <p>В багаже запрещено перевозить:</p>
+                            <ul>
+                                <li>Взрывчатые вещества</li>
+                                <li>Огнестрельное оружие</li>
+                                <li>Легковоспламеняющиеся жидкости</li>
+                                <li>Ядовитые вещества</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Регистрация -->
+                <section id="check-in" class="mb-5">
+                    <h2 class="mb-4">Регистрация</h2>
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="h5 mb-3">1. Время регистрации</h3>
+                            <p>Регистрация на рейс начинается за 24 часа и заканчивается за 40 минут до вылета.</p>
+
+                            <h3 class="h5 mb-3">2. Способы регистрации</h3>
+                            <ul>
+                                <li>Онлайн-регистрация на сайте</li>
+                                <li>Регистрация в мобильном приложении</li>
+                                <li>Регистрация в аэропорту</li>
+                            </ul>
+
+                            <h3 class="h5 mb-3">3. Посадка на борт</h3>
+                            <p>Посадка на борт начинается за 30 минут до вылета и заканчивается за 10 минут до вылета.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Возврат билетов -->
+                <section id="refund" class="mb-5">
+                    <h2 class="mb-4">Возврат билетов</h2>
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="h5 mb-3">1. Условия возврата</h3>
+                            <p>Возврат билета возможен в следующих случаях:</p>
+                            <ul>
+                                <li>Отмена рейса авиакомпанией</li>
+                                <li>Задержка рейса более чем на 2 часа</li>
+                                <li>Изменение маршрута перевозчиком</li>
+                                <li>Болезнь пассажира (при наличии справки)</li>
+                            </ul>
+
+                            <h3 class="h5 mb-3">2. Сроки возврата</h3>
+                            <p>Возврат средств осуществляется в течение 30 дней с момента подачи заявления.</p>
+
+                            <h3 class="h5 mb-3">3. Комиссия за возврат</h3>
+                            <p>Размер комиссии зависит от тарифа и времени до вылета:</p>
+                            <ul>
+                                <li>Более 24 часов до вылета: 10%</li>
+                                <li>Менее 24 часов до вылета: 25%</li>
+                                <li>После вылета: 50%</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Особые случаи -->
+                <section id="special" class="mb-5">
+                    <h2 class="mb-4">Особые случаи</h2>
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="h5 mb-3">1. Перевозка детей</h3>
+                            <p>Правила перевозки детей:</p>
+                            <ul>
+                                <li>Дети до 2 лет: перевозятся на руках у взрослого</li>
+                                <li>Дети от 2 до 12 лет: в детском кресле</li>
+                                <li>Дети старше 12 лет: как взрослые пассажиры</li>
+                            </ul>
+
+                            <h3 class="h5 mb-3">2. Перевозка животных</h3>
+                            <p>Для перевозки животных необходимо:</p>
+                            <ul>
+                                <li>Предварительное уведомление</li>
+                                <li>Ветеринарный паспорт</li>
+                                <li>Специальный контейнер</li>
+                            </ul>
+
+                            <h3 class="h5 mb-3">3. Инвалидные коляски</h3>
+                            <p>Инвалидные коляски перевозятся бесплатно в качестве багажа.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Контакты -->
+        <div class="row mb-5">
+            <div class="col-md-8 mx-auto">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-5 text-center">
+                        <h3 class="mb-4">Остались вопросы?</h3>
+                        <p class="mb-4">Наша служба поддержки готова помочь вам разобраться в правилах перевозок</p>
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="/contact" class="btn btn-primary">Написать нам</a>
+                            <a href="tel:+78001234567" class="btn btn-outline-primary">
+                                <i class="bi bi-telephone"></i> +7 (800) 123-45-67
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

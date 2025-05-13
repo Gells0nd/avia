@@ -1,7 +1,80 @@
 {% extends "base.twig" %}
 
-{% block title %}Avia | FAQ{% endblock %}
+{% block title %}Avia | Часто задаваемые вопросы{% endblock %}
 
 {% block content %}
-    <h1 class="page-title">Ответы на часто задаваемые вопросы</h1>
+    <div class="container mt-5">
+        <!-- Hero Section -->
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">Часто задаваемые вопросы</h1>
+                <p class="col-md-8 fs-4">Найдите ответы на популярные вопросы о наших услугах</p>
+            </div>
+        </div>
+
+        <!-- Поиск -->
+        <div class="row mb-4">
+            <div class="col-md-6 mx-auto">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Поиск по вопросам...">
+                    <button class="btn btn-primary" type="button">
+                        Найти
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Категории -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <button class="btn btn-outline-primary active">Все вопросы</button>
+                    <button class="btn btn-outline-primary">Бронирование</button>
+                    <button class="btn btn-outline-primary">Регистрация</button>
+                    <button class="btn btn-outline-primary">Багаж</button>
+                    <button class="btn btn-outline-primary">Возврат билетов</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Вопросы и ответы -->
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <div class="accordion" id="faqAccordion">
+                    {% for item in faq %}
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading{{ item.id }}">
+                                <button class="accordion-button {% if not loop.first %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ item.id }}" aria-expanded="{{ loop.first ? 'true' : 'false' }}" aria-controls="collapse{{ item.id }}">
+                                    {{ item.question }}
+                                </button>
+                            </h2>
+                            <div id="collapse{{ item.id }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" aria-labelledby="heading{{ item.id }}" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    {{ item.answer|raw }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Не нашли ответ? -->
+        <div class="row mt-5">
+            <div class="col-md-8 mx-auto">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-5 text-center">
+                        <h3 class="mb-4">Не нашли ответ на свой вопрос?</h3>
+                        <p class="mb-4">Наша служба поддержки готова помочь вам 24/7</p>
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="/contact" class="btn btn-primary">Написать нам</a>
+                            <a href="tel:+78001234567" class="btn btn-outline-primary">
+                                <i class="fas fa-phone me-2"></i>8 (800) 123-45-67
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

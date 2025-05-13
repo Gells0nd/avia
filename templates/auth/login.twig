@@ -3,5 +3,36 @@
 {% block title %}Avia | Вход{% endblock %}
 
 {% block content %}
-    <h1 class="page-title">Страница входа</h1>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow rounded-4">
+                    <div class="card-body p-4">
+                        <h2 class="mb-4 text-center">Вход</h2>
+                        <form method="post" action="/handlers/login.php">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Электронная почта</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Пароль</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            {% if error is defined %}
+                                <div class="alert alert-danger mt-3">
+                                    {{ error }}
+                                </div>
+                            {% endif %}
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Войти</button>
+                            </div>
+                            <div class="mt-3 text-center">
+                                <small>Нет аккаунта? <a href="/register">Зарегистрируйтесь</a></small>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
