@@ -1,5 +1,15 @@
 <?php
 
+global $db;
+require_once __DIR__ . '/config/db.php';
+
+$pdo = new PDO(
+    "mysql:host={$db['host']};dbname={$db['name']};charset=utf8mb4",
+    $db['user'],
+    $db['password'],
+    [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+);
+
 $cities = [
     "city1" => [
         "name" => "Сочи",
