@@ -16,25 +16,17 @@
         <div class="row mb-4">
             <div class="col-md-6 mx-auto">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Поиск по вопросам...">
-                    <button class="btn btn-primary" type="button">
-                        Найти
-                    </button>
+                    <input type="text" id="faqSearch" class="form-control" placeholder="Поиск по вопросам...">
+                    <span class="input-group-text">
+                        <i class="bi bi-search"></i>
+                    </span>
                 </div>
             </div>
         </div>
 
-        <!-- Категории -->
-        <div class="row mb-4">
-            <div class="col-12">
-                <div class="d-flex justify-content-center gap-3 flex-wrap">
-                    <button class="btn btn-outline-primary active">Все вопросы</button>
-                    <button class="btn btn-outline-primary">Бронирование</button>
-                    <button class="btn btn-outline-primary">Регистрация</button>
-                    <button class="btn btn-outline-primary">Багаж</button>
-                    <button class="btn btn-outline-primary">Возврат билетов</button>
-                </div>
-            </div>
+        <!-- Сообщение об отсутствии результатов -->
+        <div id="noResultsMessage" class="alert alert-info text-center mb-4" style="display: none;">
+            По вашему запросу ничего не найдено.
         </div>
 
         <!-- Вопросы и ответы -->
@@ -77,4 +69,8 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="/static/js/faq-search.js"></script>
 {% endblock %}

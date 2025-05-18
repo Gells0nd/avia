@@ -15,17 +15,12 @@
         <!-- Фильтры -->
         <div class="row mb-4">
             <div class="col-md-8">
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-outline-primary active">Все</button>
-                    <button type="button" class="btn btn-outline-primary">Компания</button>
-                    <button type="button" class="btn btn-outline-primary">Акции</button>
-                    <button type="button" class="btn btn-outline-primary">Маршруты</button>
-                </div>
+                <p class="my-1">Всего новостей: {{ news|length }}</p>
             </div>
             <div class="col-md-4">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Поиск новостей...">
-                    <button class="btn btn-primary" type="button">
+                    <input type="text" class="form-control" id="newsSearch" placeholder="Поиск новостей...">
+                    <button class="btn btn-primary" type="button" id="searchButton">
                         Поиск
                     </button>
                 </div>
@@ -33,7 +28,7 @@
         </div>
 
         <!-- Список новостей -->
-        <div class="row">
+        <div class="row" id="newsContainer">
             {% for article in news %}
                 <div class="col-md-6 mb-4">
                     <div class="card h-100">
@@ -69,4 +64,53 @@
             </ul>
         </nav>
     </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('newsSearch');
+    const newsContainer = document.getElementById('newsContainer');
+    let searchTimeout;
+
+    function renderNews(news) {
+        newsContainer.innerHTML = news.map(article => `
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    ${article.image ? `<img src="${article.image}" class="card-img-top" alt="${article.title}">` : ''}
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge bg-${article.category_color}">${article.category}</span>
+                            <small class="text-muted">${article.date}</small>
+                        </div>
+                        <h5 class="card-title">${article.title}</h5>
+                        <p class="card-text">${article.content}</p>
+                        <a href="/news/${article.id}" class="btn btn-outline-primary">Читать далее</a>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function performSearch() {
+        const query = searchInput.value.trim();
+        
+        fetch(`/api/search-news?query=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                renderNews(data.news);
+            })
+            .catch(error => {
+                console.error('Ошибка при поиске:', error);
+            });
+    }
+
+    searchInput.addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(performSearch, 300);
+    });
+
+    document.getElementById('searchButton').addEventListener('click', performSearch);
+});
+</script>
 {% endblock %}

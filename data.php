@@ -10,108 +10,17 @@ $pdo = new PDO(
     [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
 );
 
-$cities = [
-    "city1" => [
-        "name" => "Сочи",
-        "img" => "/static/img/city/sochi.jpeg",
-        "url" => "sochi"
-    ],
-    "city2" => [
-        "name" => "Казань",
-        "img" => "/static/img/city/kazan.jpg",
-        "url" => "kazan"
-    ],
-    "city3" => [
-        "name" => "Новосибирск",
-        "img" => "/static/img/city/novosibirsk.jpg",
-        "url" => "novosibirsk"
-    ],
-    "city4" => [
-        "name" => "Калининград",
-        "img" => "/static/img/city/kaliningrad.jpeg",
-        "url" => "kaliningrad"
-    ],
-];
+$dbCities = $pdo->query("SELECT * FROM popular_cities");
+$cities = $dbCities->fetchAll(PDO::FETCH_ASSOC);
 
-$news = [
-    [
-        'title' => 'Весенняя распродажа: билеты со скидкой до 50%',
-        'date' => '2025-05-01',
-        'image' => 'https://i.travel.ru/images2/2015/04/object244413/_jetkat.jpg',
-        'content' => 'Мы запускаем весеннюю распродажу! Специальные предложения на все рейсы до конца мая.',
-    ],
-    [
-        'title' => 'Новый рейс: Казань – Тбилиси уже с июня!',
-        'date' => '2025-05-10',
-        'image' => 'https://www.tatar-inform.ru/resize/shd/images/uploads/news/2023/10/27/25755f929291aa781cf55403125c6f5f.jpg',
-        'content' => 'С радостью сообщаем, что с июня запускаем новый рейс из Казани в Тбилиси. Билеты уже в продаже.',
-    ],
-    [
-        'title' => 'Бесплатный багаж в июле на всех рейсах внутри РФ',
-        'date' => '2025-05-15',
-        'image' => 'https://static.tildacdn.com/tild3964-6163-4831-a636-353162383337/shutterstock_2040654.jpeg',
-        'content' => 'Все билеты на рейсы внутри России в июле будут включать бесплатный багаж до 20 кг.',
-    ],
-];
+$dbNews = $pdo->query("SELECT * FROM news");
+$news = $dbNews->fetchAll(PDO::FETCH_ASSOC);
 
-$faq = [
-    [
-        'id' => '1',
-        'question' => 'Как изменить или отменить бронирование?',
-        'answer' => 'Вы можете отменить или изменить свое бронирование в личном кабинете или через службу поддержки.',
-    ],
-    [
-        'id' => '2',
-        'question' => 'Можно ли провозить животных?',
-        'answer' => 'Да, мы разрешаем провозить домашних животных. Ознакомьтесь с правилами перевозки на странице "Правила авиаперевозок".',
-    ],
-    [
-        'id' => '3',
-        'question' => 'Какие способы оплаты доступны?',
-        'answer' => 'Мы принимаем все основные банковские карты, а также оплату через электронные кошельки и мобильные приложения.',
-    ],
-];
+$faqDb = $pdo->query("SELECT * FROM faq");
+$faq = $faqDb->fetchAll(PDO::FETCH_ASSOC);
 
-$about = [
-    'title' => 'О компании Avia',
-    'content' => 'Avia — крупнейшая российская авиакомпания, работающая на более чем 500 направлениях по России, СНГ и Европе. Мы предлагаем самые выгодные тарифы, высокое качество обслуживания и гибкие условия для наших пассажиров.',
-];
+$dbAbout = $pdo->query("SELECT * FROM about");
+$about = $dbAbout->fetchAll(PDO::FETCH_ASSOC);
 
-$flights = [
-    [
-        'flight_number' => 'SU1234',
-        'from_city' => 'Москва',
-        'to_city' => 'Сочи',
-        'price' => 2990,
-        'depart_time' => '2025-06-10 10:00',
-        'arrive_time' => '2025-06-10 12:30',
-        'aircraft' => 'Airbus A320',
-        'duration' => '2 ч 30 мин',
-        'places_left' => 30,
-        'id' => 1,
-    ],
-    [
-        'flight_number' => 'SU2345',
-        'from_city' => 'Москва',
-        'to_city' => 'Казань',
-        'price' => 3490,
-        'depart_time' => '2025-06-12 14:00',
-        'arrive_time' => '2025-06-12 16:00',
-        'aircraft' => 'Boeing 737',
-        'duration' => '2 ч 00 мин',
-        'places_left' => 25,
-        'id' => 2,
-    ],
-    [
-        'flight_number' => 'MA2321',
-        'from_city' => 'Москва',
-        'to_city' => 'Калифорния',
-        'price' => 72999,
-        'depart_time' => '2025-06-12 14:00',
-        'arrive_time' => '2025-06-12 16:00',
-        'aircraft' => 'Boeing 737',
-        'duration' => '9 ч 30 мин',
-        'places_left' => 13,
-        'id' => 3,
-    ],
-];
+$dbFlights = $pdo->query("SELECT * FROM flights");
+$flights = $dbFlights->fetchAll(PDO::FETCH_ASSOC);

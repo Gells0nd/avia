@@ -13,31 +13,6 @@
         </div>
     </div>
 
-    <!-- Поисковая форма -->
-    <div class="container mb-5">
-        <form class="row g-3">
-            <div class="col-md-3">
-                <label for="from" class="form-label">Откуда</label>
-                <input type="text" class="form-control" id="from" placeholder="Москва">
-            </div>
-            <div class="col-md-3">
-                <label for="to" class="form-label">Куда</label>
-                <input type="text" class="form-control" id="to" placeholder="Санкт-Петербург">
-            </div>
-            <div class="col-md-2">
-                <label for="depart" class="form-label">Туда</label>
-                <input type="date" class="form-control" id="depart">
-            </div>
-            <div class="col-md-2">
-                <label for="return" class="form-label">Обратно</label>
-                <input type="date" class="form-control" id="return">
-            </div>
-            <div class="col-md-2 d-flex align-items-end">
-                <button type="submit" class="btn btn-success w-100">Найти</button>
-            </div>
-        </form>
-    </div>
-
     <!-- Популярные направления -->
     <div class="container mb-5">
         <h2 class="mb-4">Популярные направления</h2>
@@ -49,7 +24,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ city["name"] }}</h5>
                             <p class="card-text">Авиабилеты от 2 990 ₽ туда-обратно</p>
-                            <a href="/search?to={{ city["url"] }}" class="btn btn-outline-primary">Найти билеты</a>
+                            <a href="/shop" class="btn btn-outline-primary">Найти билеты</a>
                         </div>
                     </div>
                 </div>

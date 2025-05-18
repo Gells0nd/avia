@@ -25,15 +25,39 @@ $routes = [
     '/register' => ['auth/register.twig'],
     '/login' => ['auth/login.twig'],
     '/logout' => ['handler'],
+    '/api/search-news' => ['handler'],
 ];
 
 $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+// Проверяем маршрут для отдельной новости
+if (preg_match('/^\/news\/(\d+)$/', $currentPath, $matches)) {
+    $newsId = (int)$matches[1];
+    $newsItem = null;
+
+    // Ищем новость по ID
+    foreach ($news as $item) {
+        if ($item['id'] === $newsId) {
+            $newsItem = $item;
+            break;
+        }
+    }
+
+    if ($newsItem) {
+        echo $twig->render('pages/news-detail.twig', array_merge($commonData, ['news' => $newsItem]));
+        exit;
+    }
+}
 
 if (array_key_exists($currentPath, $routes)) {
     $route = $routes[$currentPath];
 
     if ($route[0] === 'handler') {
-        require_once __DIR__ . "/handlers/logout.php";
+        if ($currentPath === '/api/search-news') {
+            require_once __DIR__ . "/handlers/search-news.php";
+        } else {
+            require_once __DIR__ . "/handlers/logout.php";
+        }
         exit;
     }
 
