@@ -1,0 +1,99 @@
+{% extends "base.twig" %}
+
+{% block title %}Avia | Мои заказы{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Мои заказы</h2>
+    
+    {% if orders|length > 0 %}
+        <div class="row">
+            {% for order in orders %}
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="card-title mb-0">Заказ #{{ order.id }}</h5>
+                                <span class="badge bg-{{ order.status == 'active' ? 'success' : 'secondary' }}">
+                                    {{ order.status == 'active' ? 'Активен' : 'Отменен' }}
+                                </span>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <strong>Рейс:</strong> {{ order.flight_from }} → {{ order.flight_to }}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <strong>Дата вылета:</strong> {{ order.departure_date|date('d.m.Y H:i') }}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <strong>Пассажир:</strong> {{ order.passenger_name }}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <strong>Стоимость:</strong> {{ order.price }} ₽
+                            </div>
+                            
+                            {% if order.status == 'active' %}
+                                <form action="/api/orders/{{ order.id }}/cancel" method="POST" style="display: inline;">
+                                    <button type="submit" class="btn btn-danger btn-sm">Отменить заказ</button>
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            У вас пока нет заказов. <a href="/shop" class="alert-link">Перейти к покупке билетов</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function cancelOrder(orderId) {
+    if (!confirm('Вы уверены, что хотите отменить этот заказ?')) {
+        return;
+    }
+
+    const button = event.target;
+    button.disabled = true;
+    button.textContent = 'Отмена...';
+
+    fetch(`/api/orders/${orderId}/cancel`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.text())
+    .then(text => {
+        try {
+            const data = JSON.parse(text);
+            if (data.success) {
+                window.location.reload();
+            } else {
+                alert(data.message || 'Ошибка при отмене заказа');
+                button.disabled = false;
+                button.textContent = 'Отменить заказ';
+            }
+        } catch (e) {
+            console.error('Ошибка парсинга JSON:', text);
+            alert('Произошла ошибка при отмене заказа');
+            button.disabled = false;
+            button.textContent = 'Отменить заказ';
+        }
+    })
+    .catch(error => {
+        console.error('Ошибка:', error);
+        alert('Произошла ошибка при отмене заказа');
+        button.disabled = false;
+        button.textContent = 'Отменить заказ';
+    });
+}
+</script>
+{% endblock %} 

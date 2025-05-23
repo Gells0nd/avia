@@ -52,7 +52,15 @@
                         </div>
                         <div class="text-end">
                             <h4 class="text-primary">{{ flight.price }} ₽</h4>
-                            <a href="/book/{{ flight.id }}" class="btn btn-success">Забронировать</a>
+                            <button class="btn btn-success" 
+                                    onclick="showBuyTicketModal({{ flight.id }}, '{{ flight.from_city }} → {{ flight.to_city }}', {{ flight.price }})"
+                                    {% if flight.places_left == 0 %}disabled{% endif %}>
+                                {% if flight.places_left == 0 %}
+                                    Нет свободных мест
+                                {% else %}
+                                    Забронировать
+                                {% endif %}
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -61,4 +69,102 @@
             <p>Рейсы не найдены по заданным параметрам.</p>
         {% endif %}
     </div>
+
+    <!-- Модальное окно покупки билета -->
+    <div class="modal fade" id="buyTicketModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Покупка билета</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="buyTicketForm">
+                        <input type="hidden" id="flightId" name="flight_id">
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Рейс</label>
+                            <input type="text" class="form-control" id="flightRoute" readonly>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Стоимость</label>
+                            <input type="text" class="form-control" id="flightPrice" readonly>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="passengerName" class="form-label">Имя пассажира</label>
+                            <input type="text" class="form-control" id="passengerName" name="passenger_name" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary" onclick="buyTicket()">Купить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let buyTicketModal;
+
+document.addEventListener('DOMContentLoaded', function() {
+    const modalEl = document.getElementById('buyTicketModal');
+    buyTicketModal = new bootstrap.Modal(modalEl);
+    
+    modalEl.addEventListener('hidden.bs.modal', function () {
+        document.getElementById('buyTicketForm').reset();
+    });
+});
+
+function showBuyTicketModal(flightId, route, price) {
+    document.getElementById('flightId').value = flightId;
+    document.getElementById('flightRoute').value = route;
+    document.getElementById('flightPrice').value = price + ' ₽';
+    document.getElementById('passengerName').value = '';
+    buyTicketModal.show();
+}
+
+function buyTicket() {
+    const form = document.getElementById('buyTicketForm');
+    const formData = new FormData(form);
+    
+    fetch('/api/buy-ticket', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.text())
+    .then(text => {
+        try {
+            const data = JSON.parse(text);
+            if (data.success) {
+                buyTicketModal.hide();
+                alert(data.message);
+                window.location.reload();
+            } else {
+                if (data.message === 'Для покупки билета необходимо войти в систему') {
+                    if (confirm('Для покупки билета необходимо войти в систему. Перейти на страницу входа?')) {
+                        window.location.href = '/login';
+                    }
+                } else {
+                    alert(data.message || 'Произошла ошибка при покупке билета');
+                }
+            }
+        } catch (e) {
+            console.error('Ошибка парсинга JSON:', text);
+            alert('Произошла ошибка при покупке билета');
+        }
+    })
+    .catch(error => {
+        console.error('Ошибка:', error);
+        alert('Произошла ошибка при покупке билета');
+    });
+}
+</script>
 {% endblock %}
