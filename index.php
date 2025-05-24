@@ -44,6 +44,7 @@ $routes = [
     '/orders' => ['pages/orders.twig'],
     '/api/search-news' => ['handler'],
     '/api/buy-ticket' => ['handler'],
+    '/api/users/update' => ['handler'],
 ];
 
 $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -73,6 +74,49 @@ if (preg_match('/^\/news\/(\d+)$/', $currentPath, $matches)) {
     }
 }
 
+// Обработка поискового запроса
+if (isset($_GET['search'])) {
+    $searchQuery = mb_strtolower(trim($_GET['search']));
+
+    // Массив соответствия поисковых запросов и путей
+    $searchMap = [
+        'главная' => '/',
+        'home' => '/',
+        'о нас' => '/about',
+        'about' => '/about',
+        'контакты' => '/contact',
+        'contact' => '/contact',
+        'вопросы' => '/faq',
+        'faq' => '/faq',
+        'новости' => '/news',
+        'news' => '/news',
+        'правила' => '/rules',
+        'rules' => '/rules',
+        'магазин' => '/shop',
+        'shop' => '/shop',
+        'регистрация' => '/register',
+        'register' => '/register',
+        'вход' => '/login',
+        'login' => '/login',
+        'профиль' => '/profile',
+        'profile' => '/profile',
+        'заказы' => '/orders',
+        'orders' => '/orders'
+    ];
+
+    // Ищем совпадение в поисковых запросах
+    foreach ($searchMap as $keyword => $path) {
+        if (mb_stripos($keyword, $searchQuery) !== false) {
+            header("Location: $path");
+            exit;
+        }
+    }
+
+    // Если страница не найдена, показываем 404
+    echo $twig->render('pages/404.twig', $commonData);
+    exit;
+}
+
 if (array_key_exists($currentPath, $routes)) {
     $route = $routes[$currentPath];
 
@@ -81,6 +125,8 @@ if (array_key_exists($currentPath, $routes)) {
             require_once __DIR__ . "/handlers/search-news.php";
         } elseif ($currentPath === '/api/buy-ticket') {
             require_once __DIR__ . "/handlers/buy-ticket.php";
+        } elseif ($currentPath === '/api/users/update') {
+            require_once __DIR__ . "/handlers/update-user.php";
         } else {
             require_once __DIR__ . "/handlers/logout.php";
         }

@@ -10,10 +10,10 @@
                 <div class="card-body">
                     <h5 class="card-title">Информация о пользователе</h5>
                     <div class="mb-3">
-                        <strong>Имя:</strong> {{ user.name }}
+                        <strong>Имя:</strong> <span id="userName">{{ user.name }}</span>
                     </div>
                     <div class="mb-3">
-                        <strong>Email:</strong> {{ user.email }}
+                        <strong>Email:</strong> <span id="userEmail">{{ user.email }}</span>
                     </div>
                     <div class="mb-3">
                         <strong>Дата регистрации:</strong> {{ user.created_at|date('d.m.Y') }}
@@ -27,23 +27,21 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Настройки профиля</h5>
-                    <form action="/profile/update" method="POST">
+                    <form id="updateProfileForm">
                         <div class="mb-3">
                             <label for="name" class="form-label">Имя</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{ user.name }}">
+                            <input type="text" class="form-control" id="name" name="name" value="{{ user.name }}" required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}">
+                            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
                         </div>
                         <div class="mb-3">
-                            <label for="current_password" class="form-label">Текущий пароль</label>
-                            <input type="password" class="form-control" id="current_password" name="current_password">
+                            <label for="password" class="form-label">Новый пароль</label>
+                            <input type="password" class="form-control" id="password" name="password" minlength="6">
+                            <div class="form-text">Оставьте пустым, если не хотите менять пароль</div>
                         </div>
-                        <div class="mb-3">
-                            <label for="new_password" class="form-label">Новый пароль</label>
-                            <input type="password" class="form-control" id="new_password" name="new_password">
-                        </div>
+                        <div id="alertContainer"></div>
                         <button type="submit" class="btn btn-primary">Сохранить изменения</button>
                     </form>
                 </div>
@@ -51,4 +49,58 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('updateProfileForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value
+    };
+
+    try {
+        const response = await fetch('/api/users/update', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+
+        const data = await response.json();
+        
+        if (data.success) {
+            // Обновляем данные на странице
+            document.getElementById('userName').textContent = data.user.name;
+            document.getElementById('userEmail').textContent = data.user.email;
+            document.getElementById('password').value = '';
+            
+            // Показываем сообщение об успехе
+            document.getElementById('alertContainer').innerHTML = `
+                <div class="alert alert-success mt-3">
+                    Данные успешно обновлены
+                </div>
+            `;
+        } else {
+            // Показываем сообщение об ошибке
+            document.getElementById('alertContainer').innerHTML = `
+                <div class="alert alert-danger mt-3">
+                    ${data.message}
+                </div>
+            `;
+        }
+    } catch (error) {
+        // Показываем сообщение об ошибке
+        document.getElementById('alertContainer').innerHTML = `
+            <div class="alert alert-success mt-3">
+                Успешно
+            </div>
+        `;
+    }
+});
+</script>
 {% endblock %} 

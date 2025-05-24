@@ -6,39 +6,6 @@
     <div class="container mt-5 mb-5">
         <h2 class="mb-4">Доступные рейсы</h2>
 
-        <!-- Фильтры -->
-        <form method="get" class="row g-3 mb-4">
-            <div class="col-md-3">
-                <label for="date" class="form-label">Дата вылета</label>
-                <input type="date" name="date" id="date" class="form-control" value="{{ app.request.query.get('date') }}">
-            </div>
-            <div class="col-md-3">
-                <label for="from" class="form-label">Откуда</label>
-                <select name="from" id="from" class="form-select">
-                    <option value="">Все города</option>
-                    {% for city in cities %}
-                        <option value="{{ city.code }}" {% if app.request.query.get('from') == city.code %}selected{% endif %}>
-                            {{ city.name }}
-                        </option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label for="to" class="form-label">Куда</label>
-                <select name="to" id="to" class="form-select">
-                    <option value="">Все города</option>
-                    {% for city in cities %}
-                        <option value="{{ city.code }}" {% if app.request.query.get('to') == city.code %}selected{% endif %}>
-                            {{ city.name }}
-                        </option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="col-md-3 d-flex align-items-end">
-                <button type="submit" class="btn btn-primary w-100">Показать рейсы</button>
-            </div>
-        </form>
-
         <!-- Рейсы -->
         {% if flights %}
             {% for flight in flights %}

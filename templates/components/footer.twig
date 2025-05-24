@@ -17,42 +17,39 @@
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="/rules" class="nav-link p-0 text-body-secondary">Правила</a></li>
                     <li class="nav-item mb-2"><a href="/news" class="nav-link p-0 text-body-secondary">Новости</a></li>
-                    <li class="nav-item mb-2"><a href="/partners" class="nav-link p-0 text-body-secondary">Партнёры</a></li>
-                    <li class="nav-item mb-2"><a href="/fleet" class="nav-link p-0 text-body-secondary">Наш флот</a></li>
+                    {% if user %}
+                        <li class="nav-item mb-2"><a href="/profile" class="nav-link p-0 text-body-secondary">Профиль</a></li>
+                        <li class="nav-item mb-2"><a href="/orders" class="nav-link p-0 text-body-secondary">Мои билеты</a></li>
+                    {% else %}
+                        <li class="nav-item mb-2"><a href="/login" class="nav-link p-0 text-body-secondary">Вход</a></li>
+                        <li class="nav-item mb-2"><a href="/register" class="nav-link p-0 text-body-secondary">Регистрация</a></li>
+                    {% endif %}
                 </ul>
             </div>
 
             <div class="col-md-5 offset-md-1 mb-3">
-                <form action="/handlers/email.php" method="post">
-                    <h5>Подпишитесь на рассылку</h5>
-                    <p>Получайте специальные предложения и новости первыми.</p>
-                    <div class="d-flex flex-column flex-sm-row w-100 gap-2">
-                        <label for="newsletter1" class="visually-hidden">Email address</label>
-                        <input id="newsletter1" type="email" required name="email" class="form-control" placeholder="Email">
-                        <button class="btn btn-success" type="submit">Подписаться</button>
-                    </div>
-                </form>
+                <h5>О компании</h5>
+                <p>Avia - ваш надежный партнер в мире авиаперевозок. Мы предлагаем удобное бронирование билетов, широкий выбор направлений и высокий уровень сервиса.</p>
+                <div class="d-flex gap-2">
+                    <a href="https://instagram.com" target="_blank" class="text-body-secondary text-decoration-none">
+                        <i class="bi bi-instagram fs-4"></i>
+                    </a>
+                    <a href="https://facebook.com" target="_blank" class="text-body-secondary text-decoration-none">
+                        <i class="bi bi-facebook fs-4"></i>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" class="text-body-secondary text-decoration-none">
+                        <i class="bi bi-twitter-x fs-4"></i>
+                    </a>
+                </div>
             </div>
         </div>
 
         <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-            <p>© 2025 Avia. Все права защищены.</p>
-            <ul class="list-unstyled d-flex">
-                <li class="ms-3">
-                    <a class="link-body-emphasis" href="#" aria-label="Instagram">
-                        <svg class="bi" width="24" height="24">
-                            <use xlink:href="#instagram"/>
-                        </svg>
-                    </a>
-                </li>
-                <li class="ms-3">
-                    <a class="link-body-emphasis" href="#" aria-label="Facebook">
-                        <svg class="bi" width="24" height="24">
-                            <use xlink:href="#facebook"/>
-                        </svg>
-                    </a>
-                </li>
-            </ul>
+            <p>© {{ "now"|date("Y") }} Avia. Все права защищены.</p>
+            <p class="mb-0">
+                <a href="/rules" class="text-body-secondary text-decoration-none me-3">Правила</a>
+                <a href="/contact" class="text-body-secondary text-decoration-none">Контакты</a>
+            </p>
         </div>
     </footer>
 </div>
