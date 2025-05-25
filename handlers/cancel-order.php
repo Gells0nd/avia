@@ -66,9 +66,13 @@ try {
         'success' => true,
         'message' => 'Заказ успешно отменен'
     ]);
+
+    header('Location: /orders');
 } catch (Exception $e) {
     echo json_encode([
         'success' => false,
         'message' => 'Ошибка при отмене заказа'
     ]);
+
+    header('Location: /orders');
 }
